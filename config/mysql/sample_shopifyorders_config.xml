@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<parameters>
+
+    <!-- Connection details -->
+    <type>MYSQL</type>
+    <driver>com.mysql.cj.jdbc.Driver</driver>
+    <url>jdbc:mysql://localhost:3306/benchbase?rewriteBatchedStatements=true&amp;sslMode=DISABLED</url>
+    <username>admin</username>
+    <password>password</password>
+    <isolation>TRANSACTION_SERIALIZABLE</isolation>
+    <batchsize>128</batchsize>
+
+    <!-- Number of Shops-->
+    <scalefactor>1</scalefactor>
+
+    <!-- The workload -->
+    <terminals>1</terminals>
+    <works>
+        <work>
+            <time>60</time>
+            <rate>1000</rate>
+            <weights>58,32,2,3,1,4</weights>
+        </work>
+    </works>
+
+    <!-- ShopifyOrders Procedures declaration -->
+    <transactiontypes>
+        <transactiontype>
+            <name>PointSelectOrder</name>
+        </transactiontype>
+        <transactiontype>
+            <name>UpdateOrder</name>
+        </transactiontype>
+        <transactiontype>
+            <name>InsertOrder</name>
+        </transactiontype>
+        <transactiontype>
+            <name>OrdersByCustomerId</name>
+        </transactiontype>
+        <transactiontype>
+            <name>OrdersByShopId</name>
+        </transactiontype>
+        <transactiontype>
+            <name>SelectShop</name>
+        </transactiontype>
+    </transactiontypes>
+</parameters>
