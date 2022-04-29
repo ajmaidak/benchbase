@@ -35,6 +35,7 @@ import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.commons.configuration2.tree.ImmutableNode;
 import org.apache.commons.configuration2.tree.xpath.XPathExpressionEngine;
 import org.apache.commons.lang3.StringUtils;
+import org.json.XML;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,7 +64,13 @@ public class DBWorkload {
 
         // Get the directory of the jar output
         String jarDirPath = new File(DBWorkload.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
-        XMLConfiguration pluginConfig = buildConfiguration(jarDirPath + "/config/plugin.xml");
+        File pluginFile = new File(jarDirPath + "/config/plugin.xml");
+        XMLConfiguration pluginConfig;
+        if (pluginFile.exists()) {
+            pluginConfig = buildConfiguration(jarDirPath + "/config/plugin.xml");
+        } else {
+            pluginConfig = buildConfiguration("config/plugin.xml");
+        }
 
         Options options = buildOptions(pluginConfig);
 
