@@ -17,12 +17,20 @@
 package com.oltpbenchmark.benchmarks.shopifyorders;
 
 import com.oltpbenchmark.api.AbstractTestWorker;
+import com.oltpbenchmark.api.Procedure;
+
+import java.util.List;
 
 public class TestShopifyOrdersWorker extends AbstractTestWorker<ShopifyOrdersBenchmark> {
 
     @Override
-    protected void setUp() throws Exception {
-        super.setUp(ShopifyOrdersBenchmark.class, TestShopifyOrdersBenchmark.PROC_CLASSES);
-        this.workConf.setScaleFactor(1);
+    public List<Class<? extends Procedure>> procedures() {
+        return TestShopifyOrdersBenchmark.PROCEDURE_CLASSES;
     }
+
+    @Override
+    public Class<ShopifyOrdersBenchmark> benchmarkClass() {
+        return ShopifyOrdersBenchmark.class;
+    }
+
 }

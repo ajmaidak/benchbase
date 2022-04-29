@@ -18,23 +18,29 @@
 package com.oltpbenchmark.benchmarks.shopifyorders;
 
 import com.oltpbenchmark.api.AbstractTestBenchmarkModule;
+import com.oltpbenchmark.api.Procedure;
 import com.oltpbenchmark.benchmarks.shopifyorders.procedures.*;
+
+import java.util.List;
 
 public class TestShopifyOrdersBenchmark extends AbstractTestBenchmarkModule<ShopifyOrdersBenchmark> {
 
-    public static final Class<?>[] PROC_CLASSES = {
+    public static final List<Class<? extends Procedure>> PROCEDURE_CLASSES = List.of(
             SelectShop.class,
             InsertOrder.class,
             UpdateOrder.class,
             PointSelectOrder.class,
             OrdersByCustomerId.class,
             OrdersByShopId.class
-    };
+    );
 
     @Override
-    protected void setUp() throws Exception {
-        super.setUp(ShopifyOrdersBenchmark.class, PROC_CLASSES);
-        this.workConf.setScaleFactor(1);
+    public List<Class<? extends Procedure>> procedures() {
+        return TestShopifyOrdersBenchmark.PROCEDURE_CLASSES;
     }
 
+    @Override
+    public Class<ShopifyOrdersBenchmark> benchmarkClass() {
+        return ShopifyOrdersBenchmark.class;
+    }
 }
